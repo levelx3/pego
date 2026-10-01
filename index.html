@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>De grote stromingen binnen het christendom - Werkbundel</title>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --bg: #f4f6f7;
+      --card-bg: #ffffff;
+      --text: #2c3e50;
+      --border: #dcdde1;
+      --success: #2ecc71;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 25px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      margin: 0 0 10px 0;
+      font-size: 1.8rem;
+    }
+
+    header p {
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+    }
+
+    h2 {
+      color: var(--primary);
+      border-bottom: 2px solid var(--secondary);
+      padding-bottom: 8px;
+      margin-top: 0;
+    }
+
+    h3 {
+      color: var(--secondary);
+      margin-top: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="date"], select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f8f9fa;
+      color: var(--primary);
+    }
+
+    .question-block {
+      background: #fafafa;
+      border-left: 4px solid var(--secondary);
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 20px;
+      margin: 10px 0;
+    }
+
+    .radio-group label {
+      font-weight: normal;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: var(--secondary);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    button.btn-success {
+      background-color: var(--success);
+    }
+
+    button.btn-success:hover {
+      background-color: #27ae60;
+    }
+
+    .actions {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    #status-message {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 4px;
+      display: none;
+    }
+
+    .status-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status-error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .status-loading {
+      background-color: #e3f2fd;
+      color: #0d47a1;
+      border: 1px solid #bbdefb;
+    }
+
+    .glossary-term {
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .glossary-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .glossary-list li {
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    /* Stijlen voor veldvalidatie */
+    .invalid-field {
+      border: 2px solid var(--accent) !important;
+      background-color: #fdf2f2;
+    }
+
+    .question-block.invalid-field {
+      border-left: 4px solid var(--accent) !important;
+      outline: 2px solid var(--accent);
+    }
+
+    /* Stijl voor resultaat/feedbackbox vanuit Node-RED */
+    #response-box {
+      display: none;
+      margin-top: 25px;
+      padding: 25px;
+      background-color: #ffffff;
+      border: 1px solid #b8e2f8;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .score-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .score-row:last-child {
+      border-bottom: none;
+    }
+
+    .grade-badge {
+      font-size: 2.2rem;
+      font-weight: bold;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .grade-pass {
+      color: #2e7d32;
+      background-color: #e8f5e9;
+      border: 1px solid #a5d6a7;
+    }
+
+    .grade-fail {
+      color: #c62828;
+      background-color: #ffebee;
+      border: 1px solid #ef9a9a;
+    }
+
+    .feedback-card {
+      background: #f8f9fa;
+      border-left: 4px solid var(--secondary);
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 0 6px 6px 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>De grote stromingen binnen het christendom</h1>
+    <p>Van één kerk naar verschillende kerken — Digitale Werkbundel</p>
+  </header>
+
+  <form id="assignment-form">
+    <!-- Leerling Gegevens -->
+    <section class="card">
+      <h2>Algemene Gegevens</h2>
+      <div class="grid-3">
+        <div class="form-group">
+          <label for="student-name">Naam:</label>
+          <input type="text" id="student-name" required placeholder="Je voor- en achternaam">
+        </div>
+        <div class="form-group">
+          <label for="student-class">Klas:</label>
+          <input type="text" id="student-class" required placeholder="bijv. 3A">
+        </div>
+        <div class="form-group">
+          <label for="assignment-date">Datum:</label>
+          <input type="date" id="assignment-date" required>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leestekst Theorie -->
+    <section class="card">
+      <h2>1. Waarom zijn er zoveel christelijke kerken?</h2>
+      <h3>Van één kerk naar verschillende kerken</h3>
+      <p>Als je vandaag naar het christendom kijkt, zie je veel verschillende kerken. Denk aan de Rooms-Katholieke Kerk, de Orthodoxe Kerken en allerlei protestantse kerken. Toch hebben deze kerken iets heel belangrijks gemeenschappelijk: ze stammen allemaal af van de eerste christenen.</p>
+      <p>Rond het jaar 30, na het leven, het sterven en de opstanding van Jezus, begonnen zijn leerlingen (de apostelen) met het verspreiden van zijn boodschap. Zo ontstond de Vroege Kerk. In de eerste eeuwen waren christenen nog grotendeels verenigd. Maar in de loop der eeuwen ontstonden er meningsverschillen. Christenen waren het bijvoorbeeld niet altijd eens over de uitleg van het geloof, over wie de leiding over de kerk moest hebben of over bepaalde tradities. Sommige groepen gingen daarom hun eigen weg.</p>
+
+      <h3>De eerste scheuringen (de vroege takken)</h3>
+      <p>Al in de eerste eeuwen van het christendom ontstonden er groepen die een eigen weg insloegen. Een heel oude kerk uit het Oosten is de Assyrische Kerk van het Oosten. Zij ontwikkelde een eigen oude kerkelijke en liturgische traditie.</p>
+      <p>In het jaar 451 vond er een belangrijk Concilie (een grote bijeenkomst van kerkleiders) plaats in Chalcedon. Hier werd gestreden over de aard van Jezus. Niet iedereen was het hiermee eens, wat leidde tot een scheuring. Zo ontstonden de Oriëntaals-Orthodoxe Kerken (waaronder de Koptische, Armeense en Ethiopische kerken).</p>
+
+      <h3>Het Grote Schisma van 1054</h3>
+      <p>Een van de beroemdste breuken in de kerkgeschiedenis vond plaats in 1054. Dit wordt het Grote Schisma genoemd, een grote splitsing binnen de kerk. De kerk viel uiteen in een westelijke en een oostelijke tak:</p>
+      <ul>
+        <li><strong>In het Westen ontstond de Rooms-Katholieke Kerk.</strong> Rome werd het belangrijkste centrum. De paus kreeg hierin een zeer belangrijke leidende rol. Tradities en sacramenten staan hier centraal.</li>
+        <li><strong>In het Oosten ontstonden de Oosters-Orthodoxe Kerken.</strong> Constantinopel was een belangrijk centrum. Zij worden geleid door patriarchen en hechten enorme waarde aan oude tradities, liturgie en iconen.</li>
+      </ul>
+
+      <h3>De Protestantse Reformatie (1517)</h3>
+      <p>In de 16e eeuw was er opnieuw een grote beweging: de Reformatie. In 1517 begon deze hervormingsbeweging. Mensen waren ontevreden over de kerk van Rome en wilden terugkeren naar de bron: de Bijbel. Uit deze beweging ontstond het Protestantisme. Binnen het protestantisme bestaan heel veel verschillende kerken, maar de Bijbel speelt voor hen allemaal de belangrijkste rol.</p>
+
+      <h3>Restaurationisme in de 19e eeuw</h3>
+      <p>In de 19e eeuw ontstond er een nieuwe stroming: het Restaurationisme. Mensen vonden dat de kerken in de loop der eeuwen te veel afgedwaald waren van het oorspronkelijke christendom. Ze wilden 'restaureren' (herstellen) en terugkeren naar hoe de eerste christenen leefden, met minder nadruk op latere kerkelijke tradities.</p>
+
+      <h3>Eén stamboom, veel takken</h3>
+      <p>Je kunt het christendom dus zien als een boom. De stam is de Vroege Kerk. In de loop der tijd zijn er steeds meer takken aan de boom gekomen. Hoewel christelijke kerken verschillen in kerkelijke leiding (bijvoorbeeld de rol van de paus), liturgie en de manier waarop de Bijbel wordt uitgelegd, hebben ze ook veel gemeen. Ze delen het geloof in Jezus Christus, het belang van zijn leven, sterven en opstanding, en het boek dat hierover gaat: de Bijbel.</p>
+    </section>
+
+    <!-- Verklarende Woordenlijst -->
+    <section class="card">
+      <h2>Verklarende woordenlijst</h2>
+      <p>Gebruik deze woordenlijst om moeilijke begrippen uit de leestekst op te zoeken:</p>
+      <ul class="glossary-list">
+        <li><span class="glossary-term">Apostelen:</span> De oorspronkelijke leerlingen van Jezus die zijn boodschap verspreidden.</li>
+        <li><span class="glossary-term">Concilie:</span> Een grote bijeenkomst van kerkleiders (zoals bisschoppen) om samen te spreken over het geloof en kerkelijke beslissingen te nemen (bijvoorbeeld het Concilie van Chalcedon in 451).</li>
+        <li><span class="glossary-term">Iconen:</span> Heilige geschilderde of religieuze afbeeldingen, vooral belangrijk binnen de Oosters-Orthodoxe Kerken.</li>
+        <li><span class="glossary-term">Liturgie:</span> De vaste manier waarop een kerkdienst wordt gehouden; de gebeden, liederen en rituelen.</li>
+        <li><span class="glossary-term">Patriarchen:</span> De belangrijkste geestelijke leiders binnen de Oosters-Orthodoxe Kerken (vergelijkbaar met bisschoppen in het westen).</li>
+        <li><span class="glossary-term">Reformatie:</span> De grote hervormingsbeweging in de 16e eeuw (vanaf 1517) waaruit veel protestantse kerken zijn ontstaan. Men wilde de kerk hervormen op basis van de Bijbel.</li>
+        <li><span class="glossary-term">Restaurationisme:</span> Een beweging vanaf de 19e eeuw die streefde naar herstel ('restauratie') van het oorspronkelijke christendom, waarbij latere kerkelijke tradities worden losgelaten.</li>
+        <li><span class="glossary-term">Sacramenten:</span> Heilige tekenen of handelingen in de kerk (zoals de doop of het avondmaal), die vooral in de Rooms-Katholieke Kerk een zeer belangrijke rol spelen.</li>
+        <li><span class="glossary-term">Schisma:</span> Een grote breuk of splitsing binnen de kerk (zoals het Grote Schisma van 1054).</li>
+        <li><span class="glossary-term">Traditie:</span> Een gewoonte of manier van geloven die van generatie op generatie wordt doorgegeven.</li>
+        <li><span class="glossary-term">Vroege Kerk:</span> De eerste christelijke kerk en gemeenschap in de eeuwen direct na Jezus en de apostelen (rond het jaar 30).</li>
+      </ul>
+    </section>
+
+    <!-- Opdracht 3: Tijdlijn -->
+    <section class="card">
+      <h2>3. Een korte tijdlijn</h2>
+      <p>Zet de gebeurtenissen in de juiste volgorde. Kies de juiste letter bij elk jaartal.</p>
+      <div style="margin-bottom: 15px; background: #eef9ff; padding: 10px; border-radius: 4px;">
+        <strong>A.</strong> Begin van de Protestantse Reformatie<br>
+        <strong>B.</strong> Ontstaan van de Vroege Kerk<br>
+        <strong>C.</strong> Het Grote Schisma: Rome en Constantinopel gaan uit elkaar<br>
+        <strong>D.</strong> Concilie van Chalcedon en de ontwikkeling van de Oriëntaals-Orthodoxe Kerken<br>
+        <strong>E.</strong> Opkomst van het Restaurationisme
+      </div>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Jaartal</th>
+            <th>Gebeurtenis (Letter)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ca. 30</td>
+            <td>
+              <select class="timeline-input" data-year="ca. 30">
+                <option value="">-- Kies letter --</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>451</td>
+            <td>
+              <select class="timeline-input" data-year="451">
+                <option value="">-- Kies letter --</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>1054</td>
+            <td>
+              <select class="timeline-input" data-year="1054">
+                <option value="">-- Kies letter --</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>1517</td>
+            <td>
+              <select class="timeline-input" data-year="1517">
+                <option value="">-- Kies letter --</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>19e eeuw</td>
+            <td>
+              <select class="timeline-input" data-year="19e eeuw">
+                <option value="">-- Kies letter --</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Tabel Stromingen -->
+    <section class="card">
+      <h2>4. De belangrijkste christelijke stromingen</h2>
+      <p>Lees de tabel. Probeer vooral te begrijpen dat verschillende kerken een verschillende geschiedenis hebben.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Stroming</th>
+            <th>Hoe is ze ontstaan?</th>
+            <th>Wat is belangrijk?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Rooms-katholiek</strong></td>
+            <td>Ontwikkelde zich vooral in het Westen. Rome werd het belangrijkste centrum.</td>
+            <td>De paus speelt een belangrijke rol. Traditie en sacramenten zijn belangrijk.</td>
+          </tr>
+          <tr>
+            <td><strong>Oosters-orthodox</strong></td>
+            <td>Ontwikkelde zich vooral in het Oosten. In 1054 kwam er een grote breuk met Rome.</td>
+            <td>Patriarchen, oude tradities, liturgie en iconen zijn belangrijk.</td>
+          </tr>
+          <tr>
+            <td><strong>Oriëntaals-orthodox</strong></td>
+            <td>Ontstond door een oude kerkelijke scheiding rond het Concilie van Chalcedon in 451.</td>
+            <td>Onder andere de Koptische, Armeense en Ethiopische Kerken behoren tot deze groep.</td>
+          </tr>
+          <tr>
+            <td><strong>Assyrische Kerk van het Oosten</strong></td>
+            <td>Een zeer oude christelijke kerk uit het Oosten.</td>
+            <td>Heeft een eigen oude kerkelijke en liturgische traditie.</td>
+          </tr>
+          <tr>
+            <td><strong>Protestant</strong></td>
+            <td>Ontstond tijdens de Reformatie in de 16e eeuw.</td>
+            <td>De Bijbel speelt een belangrijke rol. Er bestaan veel verschillende protestantse kerken.</td>
+          </tr>
+          <tr>
+            <td><strong>Restaurationisme</strong></td>
+            <td>Ontstond vooral vanaf de 19e eeuw.</td>
+            <td>Men wilde terug naar het oorspronkelijke christendom en minder steunen op latere kerkelijke tradities.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Opdracht 5: Matchen -->
+    <section class="card">
+      <h2>5. Welke namen horen bij elkaar?</h2>
+      <p>Koppel elke stroming aan de juiste omschrijving.</p>
+      <div style="margin-bottom: 15px; background: #eef9ff; padding: 10px; border-radius: 4px;">
+        <strong>A.</strong> Reformatie<br>
+        <strong>B.</strong> Rome<br>
+        <strong>C.</strong> Constantinopel en andere oosterse tradities<br>
+        <strong>D.</strong> Chalcedon<br>
+        <strong>E.</strong> Terug naar het oorspronkelijke christendom
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Stroming</th>
+            <th>Koppeling</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1. Rooms-katholiek</td>
+            <td>
+              <select class="matching-input" data-item="1. Rooms-katholiek">
+                <option value="">-- Kies optie --</option>
+                <option value="A">A. Reformatie</option>
+                <option value="B">B. Rome</option>
+                <option value="C">C. Constantinopel en andere oosterse tradities</option>
+                <option value="D">D. Chalcedon</option>
+                <option value="E">E. Terug naar het oorspronkelijke christendom</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>2. Oosters-orthodox</td>
+            <td>
+              <select class="matching-input" data-item="2. Oosters-orthodox">
+                <option value="">-- Kies optie --</option>
+                <option value="A">A. Reformatie</option>
+                <option value="B">B. Rome</option>
+                <option value="C">C. Constantinopel en andere oosterse tradities</option>
+                <option value="D">D. Chalcedon</option>
+                <option value="E">E. Terug naar het oorspronkelijke christendom</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>3. Protestant</td>
+            <td>
+              <select class="matching-input" data-item="3. Protestant">
+                <option value="">-- Kies optie --</option>
+                <option value="A">A. Reformatie</option>
+                <option value="B">B. Rome</option>
+                <option value="C">C. Constantinopel en andere oosterse tradities</option>
+                <option value="D">D. Chalcedon</option>
+                <option value="E">E. Terug naar het oorspronkelijke christendom</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>4. Oriëntaals-orthodox</td>
+            <td>
+              <select class="matching-input" data-item="4. Oriëntaals-orthodox">
+                <option value="">-- Kies optie --</option>
+                <option value="A">A. Reformatie</option>
+                <option value="B">B. Rome</option>
+                <option value="C">C. Constantinopel en andere oosterse tradities</option>
+                <option value="D">D. Chalcedon</option>
+                <option value="E">E. Terug naar het oorspronkelijke christendom</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>5. Restaurationisme</td>
+            <td>
+              <select class="matching-input" data-item="5. Restaurationisme">
+                <option value="">-- Kies optie --</option>
+                <option value="A">A. Reformatie</option>
+                <option value="B">B. Rome</option>
+                <option value="C">C. Constantinopel en andere oosterse tradities</option>
+                <option value="D">D. Chalcedon</option>
+                <option value="E">E. Terug naar het oorspronkelijke christendom</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Opdracht 6: Gemeenschappelijk -->
+    <section class="card">
+      <h2>6. Wat hebben christenen gemeenschappelijk?</h2>
+      <p>Christelijke kerken verschillen van elkaar. Toch hebben ze ook veel gemeenschappelijk. Noem drie dingen die volgens jou veel christenen met elkaar verbinden.</p>
+      <div class="form-group">
+        <label for="common-1">1.</label>
+        <textarea id="common-1" placeholder="Eerste gemeenschappelijke punt..."></textarea>
+      </div>
+      <div class="form-group">
+        <label for="common-2">2.</label>
+        <textarea id="common-2" placeholder="Tweede gemeenschappelijke punt..."></textarea>
+      </div>
+      <div class="form-group">
+        <label for="common-3">3.</label>
+        <textarea id="common-3" placeholder="Derde gemeenschappelijke punt..."></textarea>
+      </div>
+    </section>
+
+    <!-- Opdracht 7: Verschillen -->
+    <section class="card">
+      <h2>7. Waarin kunnen christelijke kerken verschillen?</h2>
+      <p>Kies twee onderwerpen waarop christelijke kerken van elkaar kunnen verschillen. Je mag voorbeelden uit de tabel gebruiken.</p>
+      
+      <div class="question-block">
+        <div class="form-group">
+          <label for="diff1-topic">1. Onderwerp:</label>
+          <input type="text" id="diff1-topic" placeholder="bijv. Kerkelijke leiding">
+        </div>
+        <div class="form-group">
+          <label for="diff1-text">Verschil:</label>
+          <textarea id="diff1-text" placeholder="Leg het verschil uit..."></textarea>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <div class="form-group">
+          <label for="diff2-topic">2. Onderwerp:</label>
+          <input type="text" id="diff2-topic" placeholder="bijv. Belang van de Bijbel / sacramenten">
+        </div>
+        <div class="form-group">
+          <label for="diff2-text">Verschil:</label>
+          <textarea id="diff2-text" placeholder="Leg het verschil uit..."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- Opdracht 8: Kernbegrippen -->
+    <section class="card">
+      <h2>8. Begrippen</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Begrip</th>
+            <th>Betekenis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Vroege Kerk</td><td>De eerste christelijke kerk in de eeuwen na Jezus en de apostelen.</td></tr>
+          <tr><td>Concilie</td><td>Een grote bijeenkomst van kerkleiders om samen over het geloof te spreken.</td></tr>
+          <tr><td>Schisma</td><td>Een grote breuk of splitsing binnen de kerk.</td></tr>
+          <tr><td>Reformatie</td><td>De hervormingsbeweging van de 16e eeuw waaruit veel protestantse kerken ontstonden.</td></tr>
+          <tr><td>Traditie</td><td>Een gewoonte of manier van geloven die van generatie op generatie wordt doorgegeven.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Opdracht 9: Waar of niet waar -->
+    <section class="card">
+      <h2>9. Waar of niet waar?</h2>
+      
+      <!-- Vraag 1 -->
+      <div class="question-block">
+        <p><strong>1. Alle christelijke kerken zijn vandaag precies hetzelfde.</strong></p>
+        <div class="radio-group">
+          <label><input type="radio" name="tf1" value="Waar"> Waar</label>
+          <label><input type="radio" name="tf1" value="Niet waar"> Niet waar</label>
+        </div>
+        <div class="form-group">
+          <label for="tf1-expl">Leg kort uit:</label>
+          <input type="text" id="tf1-expl">
+        </div>
+      </div>
+
+      <!-- Vraag 2 -->
+      <div class="question-block">
+        <p><strong>2. De Vroege Kerk is de gemeenschappelijke oorsprong van veel christelijke kerken.</strong></p>
+        <div class="radio-group">
+          <label><input type="radio" name="tf2" value="Waar"> Waar</label>
+          <label><input type="radio" name="tf2" value="Niet waar"> Niet waar</label>
+        </div>
+        <div class="form-group">
+          <label for="tf2-expl">Leg kort uit:</label>
+          <input type="text" id="tf2-expl">
+        </div>
+      </div>
+
+      <!-- Vraag 3 -->
+      <div class="question-block">
+        <p><strong>3. In 1054 vond het Grote Schisma plaats tussen de kerk van Rome en de kerk van Constantinopel.</strong></p>
+        <div class="radio-group">
+          <label><input type="radio" name="tf3" value="Waar"> Waar</label>
+          <label><input type="radio" name="tf3" value="Niet waar"> Niet waar</label>
+        </div>
+        <div class="form-group">
+          <label for="tf3-expl">Leg kort uit:</label>
+          <input type="text" id="tf3-expl">
+        </div>
+      </div>
+
+      <!-- Vraag 4 -->
+      <div class="question-block">
+        <p><strong>4. De Protestantse Reformatie begon in de 16e eeuw.</strong></p>
+        <div class="radio-group">
+          <label><input type="radio" name="tf4" value="Waar"> Waar</label>
+          <label><input type="radio" name="tf4" value="Niet waar"> Niet waar</label>
+        </div>
+        <div class="form-group">
+          <label for="tf4-expl">Leg kort uit:</label>
+          <input type="text" id="tf4-expl">
+        </div>
+      </div>
+
+      <!-- Vraag 5 -->
+      <div class="question-block">
+        <p><strong>5. Alle protestantse christenen behoren tot één kerk.</strong></p>
+        <div class="radio-group">
+          <label><input type="radio" name="tf5" value="Waar"> Waar</label>
+          <label><input type="radio" name="tf5" value="Niet waar"> Niet waar</label>
+        </div>
+        <div class="form-group">
+          <label for="tf5-expl">Leg kort uit:</label>
+          <input type="text" id="tf5-expl">
+        </div>
+      </div>
+
+      <!-- Vraag 6 -->
+      <div class="question-block">
+        <p><strong>6. De Oriëntaals-Orthodoxe Kerken en de Oosters-Orthodoxe Kerken hebben precies dezelfde geschiedenis.</strong></p>
+        <div class="radio-group">
+          <label><input type="radio" name="tf6" value="Waar"> Waar</label>
+          <label><input type="radio" name="tf6" value="Niet waar"> Niet waar</label>
+        </div>
+        <div class="form-group">
+          <label for="tf6-expl">Leg kort uit:</label>
+          <input type="text" id="tf6-expl">
+        </div>
+      </div>
+    </section>
+
+    <!-- Opdracht 10: Denk erover na -->
+    <section class="card">
+      <h2>10. Denk erover na</h2>
+      <div class="form-group">
+        <label for="reflect-1">
+          Stel: een klasgenoot zegt: 'Als christenen in verschillende kerken zitten, geloven ze zeker helemaal iets anders.' Ben je het daar helemaal mee eens? Leg je antwoord uit.
+        </label>
+        <textarea id="reflect-1"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="reflect-2">
+          Waarom is het handig om de geschiedenis van het christendom als een stamboom te bekijken?
+        </label>
+        <textarea id="reflect-2"></textarea>
+      </div>
+    </section>
+
+    <!-- Opdracht 11: Mini-overzicht -->
+    <section class="card">
+      <h2>11. Mijn mini-overzicht</h2>
+      <p>Schrijf bij elke stroming één woord dat jou helpt om ze te onthouden.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Stroming</th>
+            <th>Mijn geheugensteuntje</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rooms-katholiek</td>
+            <td><input type="text" class="mnemonic-input" data-stroming="Rooms-katholiek"></td>
+          </tr>
+          <tr>
+            <td>Oosters-orthodox</td>
+            <td><input type="text" class="mnemonic-input" data-stroming="Oosters-orthodox"></td>
+          </tr>
+          <tr>
+            <td>Oriëntaals-orthodox</td>
+            <td><input type="text" class="mnemonic-input" data-stroming="Oriëntaals-orthodox"></td>
+          </tr>
+          <tr>
+            <td>Assyrische Kerk van het Oosten</td>
+            <td><input type="text" class="mnemonic-input" data-stroming="Assyrische Kerk van het Oosten"></td>
+          </tr>
+          <tr>
+            <td>Protestantisme</td>
+            <td><input type="text" class="mnemonic-input" data-stroming="Protestantisme"></td>
+          </tr>
+          <tr>
+            <td>Restaurationisme</td>
+            <td><input type="text" class="mnemonic-input" data-stroming="Restaurationisme"></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Webhook & Indienen -->
+    <section class="card">
+      <h2>Verzenden</h2>
+      <!-- Verborgen invoerveld dat de JS-variabele overneemt -->
+      <input type="hidden" id="webhook-url">
+
+      <div class="actions">
+        <button type="submit" class="btn-success">Verzenden en Nakijken</button>
+      </div>
+
+      <div id="status-message"></div>
+
+      <!-- Container voor resultaten en feedback vanuit Node-RED -->
+      <div id="response-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 20px;">
+          <div>
+            <h2 style="margin: 0; border: none; padding: 0;">Beoordeling</h2>
+            <span id="res-student-info" style="color: #666; font-size: 0.95rem;">-</span>
+          </div>
+          <div>
+            <div id="res-grade-badge" class="grade-badge grade-pass">0.0</div>
+          </div>
+        </div>
+
+        <h3>Behaalde punten per onderdeel</h3>
+        <div id="res-scores-container" style="margin-bottom: 20px;"></div>
+
+        <div class="feedback-card">
+          <h4 style="margin: 0 0 10px 0; color: var(--primary);">Feedback & Aandachtspunten</h4>
+          <ul id="res-feedback-list" style="margin: 0; padding-left: 20px;"></ul>
+        </div>
+      </div>
+    </section>
+  </form>
+</div>
+
+<script>
+  // CONFIGURATIE: Vul hier de cloud URL van jouw Node-RED instantie in
+  const NODE_RED_WEBHOOK_URL = 'https://node-red.xyz/verwerk-opdracht';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('assignment-form');
+    const webhookInput = document.getElementById('webhook-url');
+    const statusMsg = document.getElementById('status-message');
+    const responseBox = document.getElementById('response-box');
+
+    // Stel het verborgen veld in vanuit de JS-variabele
+    webhookInput.value = NODE_RED_WEBHOOK_URL;
+
+    // Functie voor validatie van alle velden
+    function validateForm() {
+      let isValid = true;
+      let firstInvalidElement = null;
+
+      // 1. Alle standaard inputs, selects en textareas controleren
+      const inputs = form.querySelectorAll('input:not([type="radio"]):not([type="hidden"]), select, textarea');
+      
+      inputs.forEach(input => {
+        if (!input.value.trim()) {
+          isValid = false;
+          input.classList.add('invalid-field');
+          if (!firstInvalidElement) firstInvalidElement = input;
+        } else {
+          input.classList.remove('invalid-field');
+        }
+
+        // Verwijder rode rand zodra de gebruiker typt of kiest
+        input.addEventListener('input', () => input.classList.remove('invalid-field'), { once: true });
+        input.addEventListener('change', () => input.classList.remove('invalid-field'), { once: true });
+      });
+
+      // 2. Radio button vragen (Opdracht 9) controleren
+      for (let i = 1; i <= 6; i++) {
+        const selectedOption = document.querySelector(`input[name="tf${i}"]:checked`);
+        const questionBlock = document.querySelector(`input[name="tf${i}"]`).closest('.question-block');
+        
+        if (!selectedOption) {
+          isValid = false;
+          questionBlock.classList.add('invalid-field');
+          if (!firstInvalidElement) firstInvalidElement = questionBlock;
+
+          // Luister naar keuzes om de rode rand te verwijderen
+          const radios = document.querySelectorAll(`input[name="tf${i}"]`);
+          radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+              questionBlock.classList.remove('invalid-field');
+            }, { once: true });
+          });
+        } else {
+          questionBlock.classList.remove('invalid-field');
+        }
+      }
+
+      // Blader naar het eerste niet-ingevulde veld
+      if (!isValid && firstInvalidElement) {
+        firstInvalidElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      return isValid;
+    }
+
+    // Functie om formulierdata te verzamelen
+    function collectFormData() {
+      // Tijdlijn verzamelen
+      const timelineData = {};
+      document.querySelectorAll('.timeline-input').forEach(select => {
+        timelineData[select.dataset.year] = select.value;
+      });
+
+      // Matching verzamelen
+      const matchingData = {};
+      document.querySelectorAll('.matching-input').forEach(select => {
+        matchingData[select.dataset.item] = select.value;
+      });
+
+      // Waar/Niet waar verzamelen
+      const trueFalseData = [];
+      for(let i = 1; i <= 6; i++) {
+        const selectedOption = document.querySelector(`input[name="tf${i}"]:checked`);
+        const explanation = document.getElementById(`tf${i}-expl`).value;
+        trueFalseData.push({
+          vraag: i,
+          antwoord: selectedOption ? selectedOption.value : null,
+          toelichting: explanation
+        });
+      }
+
+      // Geheugensteuntjes verzamelen
+      const mnemonicsData = {};
+      document.querySelectorAll('.mnemonic-input').forEach(input => {
+        mnemonicsData[input.dataset.stroming] = input.value;
+      });
+
+      // JSON structuur opbouwen
+      return {
+        timestamp: new Date().toISOString(),
+        leerling: {
+          naam: document.getElementById('student-name').value,
+          klas: document.getElementById('student-class').value,
+          datum: document.getElementById('assignment-date').value
+        },
+        opdrachten: {
+          opdracht_3_tijdlijn: timelineData,
+          opdracht_5_matching: matchingData,
+          opdracht_6_gemeenschappelijk: [
+            document.getElementById('common-1').value,
+            document.getElementById('common-2').value,
+            document.getElementById('common-3').value
+          ],
+          opdracht_7_verschillen: [
+            {
+              onderwerp: document.getElementById('diff1-topic').value,
+              verschil: document.getElementById('diff1-text').value
+            },
+            {
+              onderwerp: document.getElementById('diff2-topic').value,
+              verschil: document.getElementById('diff2-text').value
+            }
+          ],
+          opdracht_9_waar_of_niet_waar: trueFalseData,
+          opdracht_10_denk_erover_na: {
+            verschillende_kerken_geloof: document.getElementById('reflect-1').value,
+            waarom_stamboom: document.getElementById('reflect-2').value
+          },
+          opdracht_11_mini_overzicht: mnemonicsData
+        }
+      };
+    }
+
+    // Functie om de Node-RED resultaten netjes op te bouwen
+    function displayResults(data) {
+      // 1. Leerling info & Cijfer
+      const name = data.leerling?.naam || 'Leerling';
+      const klas = data.leerling?.klas ? ` (${data.leerling.klas})` : '';
+      document.getElementById('res-student-info').textContent = `${name}${klas}`;
+
+      const gradeBadge = document.getElementById('res-grade-badge');
+      const grade = data.eindcijfer ?? 0;
+      gradeBadge.textContent = grade.toFixed(1);
+
+      if (grade >= 5.5) {
+        gradeBadge.className = 'grade-badge grade-pass';
+      } else {
+        gradeBadge.className = 'grade-badge grade-fail';
+      }
+
+      // 2. Score details per onderdeel
+      const container = document.getElementById('res-scores-container');
+      container.innerHTML = '';
+
+      const labels = {
+        tijdlijn: 'Opdracht 3: Tijdlijn',
+        matching: 'Opdracht 5: Matching',
+        gemeenschappelijk: 'Opdracht 6: Gemeenschappelijk',
+        verschillen: 'Opdracht 7: Verschillen',
+        toelichtingen: 'Opdracht 9: Toelichtingen (Waar/Niet waar)',
+        reflectie: 'Opdracht 10: Reflectie',
+        geheugensteuntjes: 'Opdracht 11: Geheugensteuntjes'
+      };
+
+      if (data.scores) {
+        for (const [key, details] of Object.entries(data.scores)) {
+          const row = document.createElement('div');
+          row.className = 'score-row';
+
+          const title = labels[key] || key;
+          const detailTxt = details.goed !== undefined 
+            ? `${details.goed}/${details.max} goed` 
+            : `${details.score}/${details.max} pnt`;
+
+          row.innerHTML = `<span>${title}</span> <strong>${detailTxt} (${details.punten} pt)</strong>`;
+          container.appendChild(row);
+        }
+      }
+
+      // 3. Feedbacklijst
+      const feedbackList = document.getElementById('res-feedback-list');
+      feedbackList.innerHTML = '';
+
+      if (data.feedback && data.feedback.length > 0) {
+        data.feedback.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          li.style.marginBottom = '6px';
+          feedbackList.appendChild(li);
+        });
+      } else {
+        const li = document.createElement('li');
+        li.textContent = 'Uitstekend gedaan! Geen opmerkingen.';
+        feedbackList.appendChild(li);
+      }
+
+      // Toon de resultatenkaart en scrol er zachtjes naartoe
+      responseBox.style.display = 'block';
+      responseBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Indienen via HTTP POST Webhook naar Node-RED
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (!validateForm()) {
+        statusMsg.style.display = 'block';
+        statusMsg.className = 'status-error';
+        statusMsg.textContent = 'Vul eerst alle rood omlijnde velden in voordat je het formulier verzendt.';
+        return;
+      }
+
+      const payload = collectFormData();
+      const webhookUrl = document.getElementById('webhook-url').value;
+
+      statusMsg.style.display = 'block';
+      statusMsg.className = 'status-loading';
+      statusMsg.textContent = 'Antwoorden worden verzonden en beoordeeld... Een ogenblik geduld.';
+      responseBox.style.display = 'none';
+
+      try {
+        const response = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          statusMsg.className = 'status-success';
+          statusMsg.textContent = 'Opdracht succesvol nagekeken!';
+
+          const contentType = response.headers.get("content-type");
+          if (contentType && contentType.includes("application/json")) {
+            const data = await response.json();
+            displayResults(data);
+          } else {
+            const textData = await response.text();
+            alert("Systeem reactie: " + textData);
+          }
+        } else {
+          throw new Error(`Server reageerde met status: ${response.status}`);
+        }
+      } catch (err) {
+        statusMsg.className = 'status-error';
+        statusMsg.textContent = `Fout bij verzenden: ${err.message}. Controleer de Webhook URL en CORS-instellingen van Node-RED.`;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
