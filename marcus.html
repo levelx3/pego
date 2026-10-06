@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Het Evangelie volgens Marcus - Werkblad Leerling</title>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --bg: #f4f6f7;
+      --card-bg: #ffffff;
+      --text: #2c3e50;
+      --border: #dcdde1;
+      --success: #2ecc71;
+    }
+
+    /* BEVEILIGING: Tekstselectie uitschakelen */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      margin: 0;
+      padding: 20px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* BEVEILIGING: Inhoud verbergen wanneer iemand probeert af te drukken */
+    @media print {
+      body {
+        display: none !important;
+      }
+    }
+
+    /* Zorg dat invoervelden wel gewoon invulbaar blijven voor leerlingen */
+    input, textarea, select {
+      -webkit-user-select: auto !important;
+      -moz-user-select: auto !important;
+      -ms-user-select: auto !important;
+      user-select: auto !important;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 25px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      margin: 0 0 10px 0;
+      font-size: 1.8rem;
+    }
+
+    header p {
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+    }
+
+    h2 {
+      color: var(--primary);
+      border-bottom: 2px solid var(--secondary);
+      padding-bottom: 8px;
+      margin-top: 0;
+    }
+
+    h3 {
+      color: var(--secondary);
+      margin-top: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="date"], select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f8f9fa;
+      color: var(--primary);
+    }
+
+    .question-block {
+      background: #fafafa;
+      border-left: 4px solid var(--secondary);
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .word-box {
+      background: #eef9ff;
+      border: 1px solid #b8e2f8;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: var(--primary);
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    /* Stijl voor open tekstinvoervelden in de invultekst */
+    .inline-input {
+      display: inline-block;
+      width: 140px !important;
+      padding: 4px 8px !important;
+      margin: 2px 4px !important;
+      font-size: 0.95rem !important;
+      text-align: center;
+    }
+
+    .image-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border: 1px solid var(--border);
+    }
+
+    .image-caption {
+      font-size: 0.9rem;
+      color: #666;
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    button {
+      background-color: var(--secondary);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    button.btn-success {
+      background-color: var(--success);
+    }
+
+    button.btn-success:hover {
+      background-color: #27ae60;
+    }
+
+    .actions {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    #status-message {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 4px;
+      display: none;
+    }
+
+    .status-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status-error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .status-loading {
+      background-color: #e3f2fd;
+      color: #0d47a1;
+      border: 1px solid #bbdefb;
+    }
+
+    .invalid-field {
+      border: 2px solid var(--accent) !important;
+      background-color: #fdf2f2;
+    }
+
+    #response-box {
+      display: none;
+      margin-top: 25px;
+      padding: 25px;
+      background-color: #ffffff;
+      border: 1px solid #b8e2f8;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .score-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .score-row:last-child {
+      border-bottom: none;
+    }
+
+    .grade-badge {
+      font-size: 2.2rem;
+      font-weight: bold;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .grade-pass {
+      color: #2e7d32;
+      background-color: #e8f5e9;
+      border: 1px solid #a5d6a7;
+    }
+
+    .grade-fail {
+      color: #c62828;
+      background-color: #ffebee;
+      border: 1px solid #ef9a9a;
+    }
+
+    .feedback-card {
+      background: #f8f9fa;
+      border-left: 4px solid var(--secondary);
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 0 6px 6px 0;
+    }
+
+    canvas {
+      border: 2px dashed var(--secondary);
+      border-radius: 6px;
+      background: #fff;
+      cursor: crosshair;
+      touch-action: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Het Evangelie volgens Marcus</h1>
+    <p>Het Verhaal van de Dienaar-Koning — Digitale Werkbundel</p>
+  </header>
+
+  <form id="assignment-form">
+    <!-- Leerling Gegevens -->
+    <section class="card">
+      <h2>Algemene Gegevens</h2>
+      <div class="grid-3">
+        <div class="form-group">
+          <label for="student-name">Naam:</label>
+          <input type="text" id="student-name" required placeholder="Je voor- en achternaam">
+        </div>
+        <div class="form-group">
+          <label for="student-class">Klas:</label>
+          <input type="text" id="student-class" required placeholder="bijv. 3A">
+        </div>
+        <div class="form-group">
+          <label for="assignment-date">Datum:</label>
+          <input type="date" id="assignment-date" required>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leestekst Theorie -->
+    <section class="card">
+      <h2>Leestekst: Het Evangelie volgens Marcus</h2>
+      <h3>1. Een koninklijk verhaal als een driedelig toneelstuk</h3>
+      <p>Stel je voor dat je naar een spannend driedelig filmdrama kijkt. Vanaf de allereerste seconde verraadt de maker al wie de hoofdpersoon is, maar de mensen in het verhaal hebben het pas op het allerlaatste moment door. Dat is precies hoe het Evangelie volgens Marcus is geschreven.</p>
+      <p>Volgens historische overleveringen van de vroege kerkhistoricus Papias is dit Bijbelboek geschreven door <strong>Johannes Marcus</strong>. Hij was een medewerker van de apostel Paulus en werkte nauw samen met Petrus. Marcus verzamelde de herinneringen en ooggetuigenverslagen van Petrus en voegde ze niet zomaar willekeurig samen, maar weefde er een heel zorgvuldig gestructureerd verhaal van.</p>
+      
+      <blockquote style="border-left: 4px solid var(--secondary); margin: 15px 0; padding-left: 15px; font-style: italic;">
+        "Dit is het begin van het goede nieuws van Jezus de Messias, de Zoon van God."
+      </blockquote>
+
+      <p>Het bijzondere is dat dit de enige keer in het hele boek is dat Marcus direct tegen de lezer zegt wie Jezus is. In de rest van het boek laat hij de lezer zelf ontdekken wie Jezus is door te beschrijven wat Jezus doet, wat hij zegt en hoe mensen op hem reageren.</p>
+
+      <p>Het verhaal is opgebouwd als een drama in <strong>drie duidelijke delen</strong>:</p>
+      <ol>
+        <li><strong>Deel 1 speelt zich af in Galilea</strong>: Iedereen is verwonderd over Jezus en vraagt zich af: <em>Wie is deze man?</em></li>
+        <li><strong>Deel 2 vindt plaats onderweg</strong>: Jezus reist met zijn leerlingen en legt hen uit wat het werkelijk betekent dat hij de Messias is.</li>
+        <li><strong>Deel 3 vindt plaats in Jeruzalem</strong>: Hier zien we op een heel verrassende manier hoe Jezus Koning wordt.</li>
+      </ol>
+
+      <div class="image-container">
+        <img src="Evangelie_volgens_Marcus__Lijdende_Koning.jpg" alt="Evangelie volgens Marcus - Lijdende Koning" onerror="this.onerror=null; this.src='Evangelie_volgens_Marcus__Lijdende_Koning.png';">
+        <div class="image-caption">Het Evangelie volgens Marcus: De Lijdende Koning die dient.</div>
+      </div>
+
+      <h3>2. Deel 1: Galilea – Wie is deze man?</h3>
+      <p>Het verhaal begint niet met de geboorte van Jezus, maar met een aankondiging. Marcus citeert de oude profeten Jesaja en Maleachi, die beloofden dat God een boodschapper zou sturen om het volk voor te bereiden op de komst van God zelf. Die boodschapper is <strong>Johannes de Doper</strong>.</p>
+      <p>Wanneer Jezus verschijnt om zich te laten dopen, gebeurt er iets bijzonders: de hemel scheurt open, de Geest van God daalt op Jezus neer als een duif, en een stem uit de hemel zegt: <em>"Jij bent mijn geliefde Zoon."</em></p>
+
+      <h4>De kernboodschap van Jezus</h4>
+      <p>Hierna trekt Jezus rond in de regio Galilea met een duidelijke boodschap: <strong>het Koninkrijk van God is nabij gekomen</strong>. God start een reddingsoperatie voor de wereld. Hij wil zijn goede heerschappij herstellen door het kwaad te overwinnen en mensen uit te nodigen om onder zijn liefdevolle leiding te leven.</p>
+      <p>Jezus laat zien dat hij de kracht van God heeft:</p>
+      <ul>
+        <li><strong>Genezing</strong>: Hij geneest mensen die ernstig ziek of gebroken zijn.</li>
+        <li><strong>Bevrijding</strong>: Hij bevrijdt mensen van duistere, kwaadaardige machten.</li>
+        <li><strong>Vergeving</strong>: Hij vergeeft mensen hun zonden — iets waarvan de Joodse leiders geloofden dat alleen God dat mag doen.</li>
+      </ul>
+
+      <div style="background: #eef9ff; padding: 15px; border-radius: 6px; margin: 15px 0;">
+        <strong>Belangrijke begrippen om te kennen:</strong>
+        <ul>
+          <li><strong>Messias</strong>: Een Hebreeuws woord dat 'gezalfde' betekent. Het verwijst naar de beloofde Redder en Koning die God zou sturen.</li>
+          <li><strong>Koninkrijk van God</strong>: De situatie waarin God de baas is en waar liefde, vrede en gerechtigheid heersen.</li>
+          <li><strong>Gelijkenis</strong>: Een kort verhaal uit het dagelijks leven met een diepere, geestelijke les.</li>
+        </ul>
+      </div>
+
+      <h4>Reacties van verwarring</h4>
+      <p>De daden van Jezus roepen heel verschillende reacties op:</p>
+      <ul>
+        <li>Sommige mensen laten alles achter en worden zijn <strong>leerlingen</strong>.</li>
+        <li>De <strong>religieuze leiders</strong> worden boos en beschuldigen hem van godslastering. Ze beweren zelfs dat Jezus zijn kracht van het kwaad krijgt.</li>
+        <li>De grote <strong>menigte</strong> begrijpt er weinig van.</li>
+      </ul>
+      <p>Jezus legt in hoofdstuk 4 uit dat het Koninkrijk van God werkt als <strong>zaad op verschillende soorten grond</strong>: sommige harten staan er voor open, andere niet. Ook vergelijkt hij het Koninkrijk met een piepklein <strong>mosterdzaadje</strong>. Het lijkt in het begin onbeduidend, maar groeit uit tot een enorme boom die iedereen verrast.</p>
+      <p>Aan het einde van het eerste deel wordt duidelijk dat zelfs Jezus' eigen leerlingen nog niet echt begrijpen wie hij is.</p>
+
+      <h3>3. Deel 2: Onderweg – Een heel ander soort koning</h3>
+      <p>In het tweede deel reist Jezus met zijn leerlingen van Galilea naar Jeruzalem. Halverwege stelt Jezus aan zijn leerlingen een cruciale vraag:</p>
+      <blockquote style="border-left: 4px solid var(--secondary); margin: 15px 0; padding-left: 15px; font-style: italic;">
+        "Wie zeggen jullie dat ik ben?"
+      </blockquote>
+      <p>Petrus antwoordt vol overtuiging: <em>"U bent de Messias!"</em></p>
+      <p>Dat klinkt als een goed antwoord, maar er is een groot misverstand. Petrus en de andere leerlingen verwachten een <strong>militaire koning</strong>. Ze hopen dat Jezus de Romeinse overheersers zal verjagen en van Israël weer een machtig land zal maken.</p>
+
+      <h4>De dienende koning</h4>
+      <p>Jezus legt uit dat hij een heel ander soort Messias is. Hij is de <strong>leidende en dienende koning</strong> over wie de profeet Jesaja al schreef (in Jesaja 53). Hij zal het Koninkrijk van God niet brengen door te vechten, maar door zijn leven te geven.</p>
+      <p>Jezus leert zijn volgers wat echt leiderschap is:</p>
+      <ul>
+        <li><strong>Niet heersen, maar dienen</strong>: Wie de belangrijkste wil zijn, moet de dienaar van iedereen worden.</li>
+        <li><strong>Eigen kruis dragen</strong>: Jezus volgen betekent dat je trots, geweld en egoïsme afwijst en klaarstaat voor anderen door daden van liefde.</li>
+        <li><strong>De kernuitspraak</strong>: <em>"De Mensenzoon is niet gekomen om gediend te worden, maar om te dienen en zijn leven te geven als losgeld voor velen."</em></li>
+      </ul>
+
+      <h4>Licht op de berg</h4>
+      <p>Om te laten zien wie Jezus écht is, neemt Jezus drie leerlingen mee een hoge berg op. Plotseling verandert zijn gedaante: Jezus begint te stralen van goddelijk licht en glorie. De oude profeten <strong>Mozes en Elia</strong> verschijnen naast hem. Net als vroeger bij de berg Sinaï daalt er een wolk neer en zegt Gods stem opnieuw: <em>"Dit is mijn geliefde Zoon."</em></p>
+      <p>Marcus laat hiermee zien dat Jezus de lichamelijke aanwezigheid van Gods eigen glorie is. Toch begrijpen de leerlingen het nog steeds niet; ze blijven bang en verward.</p>
+
+      <h3>4. Deel 3: Jeruzalem – De Koning aan het kruis</h3>
+      <p>In het derde deel komt Jezus aan in Jeruzalem voor het <strong>Pascha</strong> (het Joodse feest waarin de bevrijding uit de slavernij in Egypte door het bloed van het Paaslam wordt herdacht).</p>
+      <ol>
+        <li><strong>De intocht</strong>: Jezus rijdt op een ezel Jeruzalem binnen. De mensen eren hem als een koning.</li>
+        <li><strong>De tempel</strong>: Jezus gaat naar de tempel en jaagt de geldwisselaars en verkopers weg. Hij stopt het offersysteem en beschuldigt de leiders van hypocrisie. Ook waarschuwt hij dat Jeruzalem en de tempel binnen één generatie verwoest zullen worden.</li>
+        <li><strong>Het Laatste Avondmaal</strong>: Tijdens de maaltijd geeft Jezus een nieuwe betekenis aan de symbolen van het Pascha. Het brood en de wijn wijzen nu op zijn eigen lichaam en bloed, dat geofferd zal worden om mensen te bevrijden van de slavernij van zonde en dood.</li>
+      </ol>
+
+      <h4>De kruisiging en de schokkende ontdekking</h4>
+      <p>De leiders van Jeruzalem smeden een plan om Jezus te laten doden. Jezus wordt gearresteerd, verhoord en uiteindelijk door de Romeinse gouverneur Pilatus veroordeeld tot de kruisdood.</p>
+      <p>Wanneer Jezus aan het kruis hangt, gebeurt er iets wat alles omdraait:</p>
+      <ul>
+        <li>Er valt een diepe <strong>duisternis</strong> over het land.</li>
+        <li>Jezus roept het uit en sterft.</li>
+        <li>Een <strong>Romeinse soldaat</strong> die onder aan het kruis staat en Jezus ziet sterven, roept uit: <em>"Waarlijk, deze mens was de Zoon van God!"</em></li>
+      </ul>
+      <p>Het is enorm verrassend dat juist een heidense Romeinse soldaat als eerste begrijpt wie Jezus werkelijk is: de gekruisigde Zoon van God die stierf uit liefde voor vriend en vijand.</p>
+
+      <h4>Het lege graf</h4>
+      <p>Na zijn dood wordt Jezus in een rotsgraf gelegd. Op de eerste dag van de nieuwe week komen drie vrouwelijke leerlingen naar het graf. De zware steen is weggerold en een engel vertelt hen dat Jezus is opgestaan uit de dood! Hij zegt dat ze dit goede nieuws aan de andere leerlingen moeten vertellen en dat Jezus hen weer zal ontmoeten in Galilea.</p>
+      <p>Maar wat doen de vrouwen? Ze raken in paniek, vluchten weg bij het graf en durven uit angst eerst tegen niemand iets te zeggen.</p>
+
+      <h3>5. Een onverwacht open einde: Wat doe jij ermee?</h3>
+      <p>Als je het oorspronkelijke manuscript van Marcus leest, stopt het verhaal heel abrupt met de geschrokken vrouwen bij het lege graf. Waarom stopt Marcus zo vreemd?</p>
+      <p>Marcus doet dit heel bewust. Het hele verhaal draait om de schokkende bewering dat de lijdende, gekruisigde en opgestane Jezus de Messias en de Zoon van God is. Door het verhaal met zo'n open einde te laten stoppen, stelt Marcus de lezer een directe vraag:</p>
+      <blockquote style="border-left: 4px solid var(--secondary); margin: 15px 0; padding-left: 15px; font-style: italic;">
+        Wat doe jij met dit verhaal? Ren je net als de geschrokken leerlingen weg, of herken je Jezus als jouw Koning en ga je dit goede nieuws doorvertellen?
+      </blockquote>
+    </section>
+
+    <!-- Deel 1: Invultekst -->
+    <section class="card">
+      <h2>Deel 1: De grote invultekst over het verhaal (Begrip & Kennis)</h2>
+      <p>Vul de ontbrekende woorden in op de lege plekken. Kies uit de woorden in het woordenblok hieronder.</p>
+
+      <div class="word-box">
+        onderweg • zonden • Jeruzalem • Pascha • Romeinse • Johannes • tempel • lege • Messias • Galilea • open • Petrus • Mozes • dienende • mosterdzaadje • militaire
+      </div>
+
+      <div class="question-block" style="line-height: 2.2;">
+        Het Evangelie volgens Marcus is volgens vroege overleveringen geschreven door 
+        1. <input type="text" class="fill-input inline-input" data-nr="1" placeholder="woord 1"> Marcus, 
+        die nauw samenwerkte met de apostel 
+        2. <input type="text" class="fill-input inline-input" data-nr="2" placeholder="woord 2">. 
+        Marcus weefde de ooggetuigenverslagen van Petrus samen tot een zorgvuldig opgebouwd verhaal.<br><br>
+
+        Het boek is opgebouwd als een drama in drie delen:<br>
+        Deel 1 speelt zich af in de regio 
+        3. <input type="text" class="fill-input inline-input" data-nr="3" placeholder="woord 3">. 
+        Jezus trekt hier rond, geneest zieken, drijft boze geesten uit en vergeeft mensen hun 
+        4. <input type="text" class="fill-input inline-input" data-nr="4" placeholder="woord 4">. 
+        Jezus legt uit dat het Koninkrijk van God werkt als zaad op verschillende soorten grond en vergelijkt het met een klein 
+        5. <input type="text" class="fill-input inline-input" data-nr="5" placeholder="woord 5"> dat uitgroeit tot een grote boom.<br><br>
+
+        Deel 2 vindt plaats 
+        6. <input type="text" class="fill-input inline-input" data-nr="6" placeholder="woord 6"> naar Jeruzalem. 
+        Wanneer Jezus aan zijn leerlingen vraagt wie hij is, antwoordt Petrus dat hij de 
+        7. <input type="text" class="fill-input inline-input" data-nr="7" placeholder="woord 7"> is. 
+        De leerlingen verwachten een 
+        8. <input type="text" class="fill-input inline-input" data-nr="8" placeholder="woord 8"> koning die de Romeinen zal verjagen, maar Jezus legt uit dat hij een 
+        9. <input type="text" class="fill-input inline-input" data-nr="9" placeholder="woord 9"> koning is die gekomen is om zijn leven te geven. Op een hoge berg verandert Jezus van gedaante in aanwezigheid van 
+        10. <input type="text" class="fill-input inline-input" data-nr="10" placeholder="woord 10"> en Elia.<br><br>
+
+        Deel 3 speelt zich af in 
+        11. <input type="text" class="fill-input inline-input" data-nr="11" placeholder="woord 11"> tijdens het feest van het 
+        12. <input type="text" class="fill-input inline-input" data-nr="12" placeholder="woord 12">. 
+        Jezus rijdt op een ezel de stad binnen en veegt later de 
+        13. <input type="text" class="fill-input inline-input" data-nr="13" placeholder="woord 13"> schoon. 
+        Aan het kruis roept een heidense 
+        14. <input type="text" class="fill-input inline-input" data-nr="14" placeholder="woord 14"> soldaat uit: "Waarlijk, deze mens was de Zoon van God!". Drie vrouwen ontdekken een 
+        15. <input type="text" class="fill-input inline-input" data-nr="15" placeholder="woord 15"> graf, maar vluchten weg uit angst. Het boek heeft zo een 
+        16. <input type="text" class="fill-input inline-input" data-nr="16" placeholder="woord 16"> einde.
+      </div>
+    </section>
+
+    <!-- Deel 2: Begrippenkaart -->
+    <section class="card">
+      <h2>Deel 2: Begrippenkaart (Terminologie verankeren)</h2>
+      <p>Koppel het juiste begrip aan de juiste omschrijving door de juiste letter bij het nummer te kiezen.</p>
+
+      <div style="margin-bottom: 15px; background: #eef9ff; padding: 15px; border-radius: 4px;">
+        <strong>A.</strong> Een kort verhaal uit het dagelijks leven met een diepere geestelijke les.<br>
+        <strong>B.</strong> Het Joodse feest waarin de bevrijding uit de slavernij in Egypte wordt herdacht.<br>
+        <strong>C.</strong> Hebreeuws woord dat 'gezalfde' betekent; de beloofde Redder en Koning.<br>
+        <strong>D.</strong> De situatie waarin God de leiding heeft en waar liefde, vrede en gerechtigheid heersen.
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Begrip</th>
+            <th>Omschrijving (Letter)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Messias</td>
+            <td>
+              <select class="term-input" data-term="Messias">
+                <option value="">-- Kies letter --</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Koninkrijk van God</td>
+            <td>
+              <select class="term-input" data-term="Koninkrijk van God">
+                <option value="">-- Kies letter --</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Gelijkenis</td>
+            <td>
+              <select class="term-input" data-term="Gelijkenis">
+                <option value="">-- Kies letter --</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Pascha</td>
+            <td>
+              <select class="term-input" data-term="Pascha">
+                <option value="">-- Kies letter --</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Deel 3: Structuur-analyse -->
+    <section class="card">
+      <h2>Deel 3: Structuur-analyse van de drie delen</h2>
+      <p>Vul de onderstaande tabel aan op basis van de leestekst.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Deel van het boek</th>
+            <th>Waar speelt het zich af?</th>
+            <th>Wat is de centrale vraag?</th>
+            <th>Wat voor beeld van Jezus zien we?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Deel 1</strong></td>
+            <td>Galilea</td>
+            <td>Wie is deze man?</td>
+            <td>Machtige leraar en wonderdoener</td>
+          </tr>
+          <tr>
+            <td><strong>Deel 2</strong></td>
+            <td>
+              <input type="text" id="struct-1" placeholder="1. Waar speelt Deel 2 zich af?">
+            </td>
+            <td>Wat voor Messias is Jezus?</td>
+            <td>
+              <input type="text" id="struct-2" placeholder="2. Wat voor beeld van Jezus zien we?">
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Deel 3</strong></td>
+            <td>Jeruzalem</td>
+            <td>
+              <input type="text" id="struct-3" placeholder="3. Wat is de centrale vraag in Deel 3?">
+            </td>
+            <td>Lijdende Koning die overwint</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Deel 4: Dieper graven & Zelf nadenken -->
+    <section class="card">
+      <h2>Deel 4: Dieper graven & Zelf nadenken (Eigen maken van de stof)</h2>
+      <p>Beantwoord de volgende vragen in duidelijke, volledige zinnen.</p>
+
+      <div class="question-block">
+        <label for="deep-1"><strong>1. Het misverstand over de Koning:</strong><br>Waarom waren de leerlingen van Jezus zo verward toen Jezus vertelde wat er met hem zou gebeuren in Jeruzalem? Wat voor koning verwachtten zij, en wat voor Koning was Jezus echt?</label>
+        <textarea id="deep-1" placeholder="Typ je antwoord hier..."></textarea>
+      </div>
+
+      <div class="question-block">
+        <label for="deep-2"><strong>2. De verrassing aan het kruis:</strong><br>Wie was de eerste persoon in het verhaal die na het sterven van Jezus begrijpt dat Jezus écht de Zoon van God is? Waarom is dit extra bijzonder en verrassend?</label>
+        <textarea id="deep-2" placeholder="Typ je antwoord hier..."></textarea>
+      </div>
+
+      <div class="question-block">
+        <label for="deep-3"><strong>3. Het open einde:</strong><br>Waarom heeft Marcus gekozen voor een 'open einde' aan zijn evangelie? Wat wil hij dat jij als lezer doet of bedenkt?</label>
+        <textarea id="deep-3" placeholder="Typ je antwoord hier..."></textarea>
+      </div>
+
+      <div class="question-block">
+        <label for="deep-4"><strong>4. Koppeling naar jou:</strong><br>Jezus zegt in het verhaal: <em>"Wie de belangrijkste wil zijn, moet de dienaar van iedereen worden."</em><br>Wat betekent deze regel volgens jou in het dagelijks leven (bijvoorbeeld op school, thuis of in de sportclub)? Geef een concreet voorbeeld.</label>
+        <textarea id="deep-4" placeholder="Typ je antwoord en een concreet voorbeeld hier..."></textarea>
+      </div>
+
+      <div class="question-block">
+        <label for="drawing-canvas"><strong>5. Symbool van Marcus:</strong><br>Teken hier het symbool waarmee de evangelist Marcus vaak wordt afgebeeld:</label>
+        <canvas id="drawing-canvas" width="500" height="250"></canvas>
+        <div style="margin-top: 8px;">
+          <button type="button" id="clear-canvas-btn" style="background-color: var(--accent); padding: 6px 14px; font-size: 0.85rem;">Tekening wissen</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Webhook & Indienen -->
+    <section class="card">
+      <h2>Verzenden</h2>
+      <input type="hidden" id="webhook-url">
+
+      <div class="actions">
+        <button type="submit" class="btn-success">Verzenden en Nakijken</button>
+      </div>
+
+      <div id="status-message"></div>
+
+      <!-- Container voor resultaten en feedback vanuit Node-RED -->
+      <div id="response-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 20px;">
+          <div>
+            <h2 style="margin: 0; border: none; padding: 0;">Beoordeling</h2>
+            <span id="res-student-info" style="color: #666; font-size: 0.95rem;">-</span>
+          </div>
+          <div>
+            <div id="res-grade-badge" class="grade-badge grade-pass">0.0</div>
+          </div>
+        </div>
+
+        <h3>Behaalde punten per onderdeel</h3>
+        <div id="res-scores-container" style="margin-bottom: 20px;"></div>
+
+        <div class="feedback-card">
+          <h4 style="margin: 0 0 10px 0; color: var(--primary);">Feedback & Aandachtspunten</h4>
+          <ul id="res-feedback-list" style="margin: 0; padding-left: 20px;"></ul>
+        </div>
+      </div>
+    </section>
+  </form>
+</div>
+
+<script>
+  // BEVEILIGING: 1. Rechtermuisknop blokkeren
+  document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+  });
+
+  // BEVEILIGING: 2. Snelkoppelingen & PrintScreen blokkeren
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P')) {
+      e.preventDefault();
+      alert('Afdrukken is niet toegestaan.');
+      return false;
+    }
+    if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+      e.preventDefault();
+      return false;
+    }
+    if (e.key === 'PrintScreen') {
+      e.preventDefault();
+      navigator.clipboard.writeText('');
+      alert('Screenshots maken via PrintScreen is niet toegestaan.');
+    }
+  });
+
+  const NODE_RED_WEBHOOK_URL = 'https://node-red.xyz/verwerk-opdracht';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('assignment-form');
+    const webhookInput = document.getElementById('webhook-url');
+    const statusMsg = document.getElementById('status-message');
+    const responseBox = document.getElementById('response-box');
+
+    webhookInput.value = NODE_RED_WEBHOOK_URL;
+
+    // Canvas functionaliteit voor vraag 5 (tekenen)
+    const canvas = document.getElementById('drawing-canvas');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+
+    function getCanvasCoords(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      const coords = getCanvasCoords(e);
+      ctx.beginPath();
+      ctx.moveTo(coords.x, coords.y);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      e.preventDefault();
+      const coords = getCanvasCoords(e);
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = '#2c3e50';
+      ctx.lineTo(coords.x, coords.y);
+      ctx.stroke();
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseleave', stopDrawing);
+
+    canvas.addEventListener('touchstart', startDrawing);
+    canvas.addEventListener('touchmove', draw);
+    canvas.addEventListener('touchend', stopDrawing);
+
+    document.getElementById('clear-canvas-btn').addEventListener('click', () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+
+    // Validatie
+    function validateForm() {
+      let isValid = true;
+      let firstInvalidElement = null;
+
+      const inputs = form.querySelectorAll('input:not([type="hidden"]), select, textarea');
+      
+      inputs.forEach(input => {
+        if (!input.value.trim()) {
+          isValid = false;
+          input.classList.add('invalid-field');
+          if (!firstInvalidElement) firstInvalidElement = input;
+        } else {
+          input.classList.remove('invalid-field');
+        }
+
+        input.addEventListener('input', () => input.classList.remove('invalid-field'), { once: true });
+        input.addEventListener('change', () => input.classList.remove('invalid-field'), { once: true });
+      });
+
+      if (!isValid && firstInvalidElement) {
+        firstInvalidElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      return isValid;
+    }
+
+    // Formulier data verzamelen
+    function collectFormData() {
+      const fillData = {};
+      document.querySelectorAll('.fill-input').forEach(input => {
+        fillData[`gat_${input.dataset.nr}`] = input.value.trim();
+      });
+
+      const termData = {};
+      document.querySelectorAll('.term-input').forEach(select => {
+        termData[select.dataset.term] = select.value;
+      });
+
+      return {
+        timestamp: new Date().toISOString(),
+        leerling: {
+          naam: document.getElementById('student-name').value,
+          klas: document.getElementById('student-class').value,
+          datum: document.getElementById('assignment-date').value
+        },
+        opdrachten: {
+          deel_1_invultekst: fillData,
+          deel_2_begrippen: termData,
+          deel_3_structuur: {
+            deel_2_waar: document.getElementById('struct-1').value,
+            deel_2_beeld: document.getElementById('struct-2').value,
+            deel_3_vraag: document.getElementById('struct-3').value
+          },
+          deel_4_vragen: {
+            misverstand_koning: document.getElementById('deep-1').value,
+            verrassing_kruis: document.getElementById('deep-2').value,
+            open_einde: document.getElementById('deep-3').value,
+            koppeling_dienaar: document.getElementById('deep-4').value,
+            symbool_tekening: canvas.toDataURL()
+          }
+        }
+      };
+    }
+
+    function displayResults(data) {
+      const name = data.leerling?.naam || 'Leerling';
+      const klas = data.leerling?.klas ? ` (${data.leerling.klas})` : '';
+      document.getElementById('res-student-info').textContent = `${name}${klas}`;
+
+      const gradeBadge = document.getElementById('res-grade-badge');
+      const grade = data.eindcijfer ?? 0;
+      gradeBadge.textContent = grade.toFixed(1);
+
+      if (grade >= 5.5) {
+        gradeBadge.className = 'grade-badge grade-pass';
+      } else {
+        gradeBadge.className = 'grade-badge grade-fail';
+      }
+
+      const container = document.getElementById('res-scores-container');
+      container.innerHTML = '';
+
+      const labels = {
+        invultekst: 'Deel 1: Invultekst',
+        begrippen: 'Deel 2: Begrippenkaart',
+        structuur: 'Deel 3: Structuur-analyse',
+        vragen: 'Deel 4: Verwerkingsvragen'
+      };
+
+      if (data.scores) {
+        for (const [key, details] of Object.entries(data.scores)) {
+          const row = document.createElement('div');
+          row.className = 'score-row';
+          const title = labels[key] || key;
+          const detailTxt = details.goed !== undefined 
+            ? `${details.goed}/${details.max} goed` 
+            : `${details.score}/${details.max} pnt`;
+
+          row.innerHTML = `<span>${title}</span> <strong>${detailTxt} (${details.punten} pt)</strong>`;
+          container.appendChild(row);
+        }
+      }
+
+      const feedbackList = document.getElementById('res-feedback-list');
+      feedbackList.innerHTML = '';
+
+      if (data.feedback && data.feedback.length > 0) {
+        data.feedback.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          li.style.marginBottom = '6px';
+          feedbackList.appendChild(li);
+        });
+      } else {
+        const li = document.createElement('li');
+        li.textContent = 'Uitstekend gedaan! Geen opmerkingen.';
+        feedbackList.appendChild(li);
+      }
+
+      responseBox.style.display = 'block';
+      responseBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (!validateForm()) {
+        statusMsg.style.display = 'block';
+        statusMsg.className = 'status-error';
+        statusMsg.textContent = 'Vul eerst alle rood omlijnde velden in voordat je het formulier verzendt.';
+        return;
+      }
+
+      const payload = collectFormData();
+      const webhookUrl = document.getElementById('webhook-url').value;
+
+      statusMsg.style.display = 'block';
+      statusMsg.className = 'status-loading';
+      statusMsg.textContent = 'Antwoorden worden verzonden en beoordeeld... Een ogenblik geduld.';
+      responseBox.style.display = 'none';
+
+      try {
+        const response = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          statusMsg.className = 'status-success';
+          statusMsg.textContent = 'Opdracht succesvol nagekeken!';
+
+          const contentType = response.headers.get("content-type");
+          if (contentType && contentType.includes("application/json")) {
+            const data = await response.json();
+            displayResults(data);
+          } else {
+            const textData = await response.text();
+            alert("Systeem reactie: " + textData);
+          }
+        } else {
+          throw new Error(`Server reageerde met status: ${response.status}`);
+        }
+      } catch (err) {
+        statusMsg.className = 'status-error';
+        statusMsg.textContent = `Fout bij verzenden: ${err.message}. Controleer de Webhook URL en CORS-instellingen van Node-RED.`;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
