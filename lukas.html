@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Het Evangelie volgens Lucas -  Digitale Werkbundel</title>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --bg: #f4f6f7;
+      --card-bg: #ffffff;
+      --text: #2c3e50;
+      --border: #dcdde1;
+      --success: #2ecc71;
+    }
+
+    /* BEVEILIGING: Tekstselectie uitschakelen */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      margin: 0;
+      padding: 20px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* BEVEILIGING: Inhoud verbergen bij afdrukken */
+    @media print {
+      body {
+        display: none !important;
+      }
+    }
+
+    /* Invoervelden blijven wel selecteerbaar en invulbaar */
+    input, textarea, select {
+      -webkit-user-select: auto !important;
+      -moz-user-select: auto !important;
+      -ms-user-select: auto !important;
+      user-select: auto !important;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 30px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      margin: 0 0 10px 0;
+      font-size: 2rem;
+    }
+
+    header p {
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+    }
+
+    h2 {
+      color: var(--primary);
+      border-bottom: 2px solid var(--secondary);
+      padding-bottom: 8px;
+      margin-top: 0;
+    }
+
+    h3 {
+      color: var(--secondary);
+      margin-top: 25px;
+    }
+
+    h4 {
+      color: var(--primary);
+      margin-top: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="date"], select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f8f9fa;
+      color: var(--primary);
+    }
+
+    .question-block {
+      background: #fafafa;
+      border-left: 4px solid var(--secondary);
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .word-box {
+      background: #eef9ff;
+      border: 1px solid #b8e2f8;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: var(--primary);
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .inline-input {
+      display: inline-block;
+      width: 160px !important;
+      padding: 4px 8px !important;
+      margin: 2px 4px !important;
+      font-size: 0.95rem !important;
+      text-align: center;
+    }
+
+    .image-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border: 1px solid var(--border);
+    }
+
+    .image-caption {
+      font-size: 0.9rem;
+      color: #666;
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    button {
+      background-color: var(--secondary);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    button.btn-success {
+      background-color: var(--success);
+    }
+
+    button.btn-success:hover {
+      background-color: #27ae60;
+    }
+
+    .actions {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    #status-message {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 4px;
+      display: none;
+    }
+
+    .status-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status-error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .status-loading {
+      background-color: #e3f2fd;
+      color: #0d47a1;
+      border: 1px solid #bbdefb;
+    }
+
+    .invalid-field {
+      border: 2px solid var(--accent) !important;
+      background-color: #fdf2f2;
+    }
+
+    #response-box {
+      display: none;
+      margin-top: 25px;
+      padding: 25px;
+      background-color: #ffffff;
+      border: 1px solid #b8e2f8;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .score-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .score-row:last-child {
+      border-bottom: none;
+    }
+
+    .grade-badge {
+      font-size: 2.2rem;
+      font-weight: bold;
+      padding: 8px 20px;
+      border-radius: 8px;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .grade-pass {
+      color: #2e7d32;
+      background-color: #e8f5e9;
+      border: 1px solid #a5d6a7;
+    }
+
+    .grade-fail {
+      color: #c62828;
+      background-color: #ffebee;
+      border: 1px solid #ef9a9a;
+    }
+
+    .feedback-card {
+      background: #f8f9fa;
+      border-left: 4px solid var(--secondary);
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 0 6px 6px 0;
+    }
+
+    canvas {
+      border: 2px dashed var(--secondary);
+      border-radius: 6px;
+      background: #fff;
+      cursor: crosshair;
+      touch-action: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Het evangelie volgens Lucas</h1>
+    <p>Het omgekeerde koninkrijk van Jezus —  Digitale Werkbundel</p>
+  </header>
+
+  <form id="assignment-form">
+    <!-- Leerling Gegevens -->
+    <section class="card">
+      <h2>Algemene Gegevens</h2>
+      <div class="grid-3">
+        <div class="form-group">
+          <label for="student-name">Naam:</label>
+          <input type="text" id="student-name" required placeholder="Je voor- en achternaam">
+        </div>
+        <div class="form-group">
+          <label for="student-class">Klas:</label>
+          <input type="text" id="student-class" required placeholder="bijv. 3A">
+        </div>
+        <div class="form-group">
+          <label for="assignment-date">Datum:</label>
+          <input type="date" id="assignment-date" required>
+        </div>
+      </div>
+    </section>
+
+    <!-- Uitgebreide Leestekst & Infographic -->
+    <section class="card">
+      <h2>Visueel Overzicht & Leestekst</h2>
+      
+      <!-- Toegevoegde Infographic -->
+      <div class="image-container">
+        <img src="Het_Evangelie_volgens_Lucas.png" alt="Het Evangelie volgens Lucas: Het Omgekeerde Koninkrijk" onerror="this.onerror=null; this.src='Het_Evangelie_volgens_Lucas.jpg';">
+        <div class="image-caption">Visuele samenvatting: Het Omgekeerde Koninkrijk en de twee hoofdfasen in het Evangelie volgens Lucas.</div>
+      </div>
+
+      <h3>1. Inleiding: Wie schreef het evangelie volgens Lucas en waarom?</h3>
+      <p>Stel je voor dat je een spannende ontdekkingsreis maakt door het leven van Jezus. De gids die jou meeneemt is Lukas. Lukas was geen ooggetuige vanaf de allereerste dag, maar hij was wel een slimme dokter en een trouwe reisgenoot van de apostel Paulus. Hij vond het superbelangrijk dat het echte verhaal over Jezus heel nauwkeurig werd opgeschreven. Daarom ging hij als een echte speurder te werk: hij interviewde mensen die Jezus zelf hadden meegemaakt en verzamelde al hun ooggetuigenverslagen om tot een helder en ordelijk verslag te komen.</p>
+      <p>Het bijbelboek Lukas is het eerste deel van een indrukwekkend tweeluik; deel twee is het boek Handelingen. Voor Lukas was de komst van Jezus niet zomaar geschiedenis, maar de vervulling van Gods eeuwenoude belofte aan Israël én aan de hele wereld.</p>
+      
+      <p><strong>De hoofdstructuur van het Evangelie volgens Lucas:</strong></p>
+      <ul>
+        <li><strong>De voorbereiding (hoofdstuk 1 t/m 2):</strong> De bijzondere geboorteverhalen van Johannes de Doper en Jezus die als spiegels naast elkaar staan.</li>
+        <li><strong>De missie in Galilea (hoofdstuk 3 t/m 9):</strong> Jezus begint zijn werk in zijn eigen streek en introduceert zijn 'omgekeerde koninkrijk'.</li>
+        <li><strong>De reis naar Jeruzalem (hoofdstuk 10 t/m 19):</strong> Het grote middenstuk waarin Jezus onderweg is en leert wat het kost om hem echt te volgen.</li>
+        <li><strong>De slotweek, dood en opstanding (hoofdstuk 20 t/m 24):</strong> Het hoogtepunt in Jeruzalem met de lijdensweg, kruisiging en de openbaring op de Emmaüsweg.</li>
+      </ul>
+
+      <h3>2. De voorbereiding en Galilea (Hoofdstuk 1 t/m 9)</h3>
+      <p>Het boek opent met de aankondiging en geboorte van Johannes de Doper (aan het oude echtpaar Zacharias en Elisabeth) en Jezus (aan Maria en Jozef). Na zijn doop in de Jordaan stelt Lukas de stamboom van Jezus op. Waar andere evangelisten stoppen bij Abraham, klimt Lukas helemaal terug via koning David naar <strong>Adam</strong>. Hiermee toont hij aan dat Jezus er niet alleen is voor de Joden, maar voor de gehele mensheid.</p>
+      <p>In Nazaret leest Jezus voor uit Jesaja en introduceert het begrip <strong>Afesis</strong> (vrijlating/kwijtschelding, verbonden aan het Joodse Jubeljaar). Tijdens zijn toespraak op een vlakke plek (de veldrede) legt hij het omgekeerde koninkrijk uit. Op de berg van de gedaanteverandering spreekt hij met Mozes en Elia over zijn aanstaande <strong>exodus</strong> die hij in Jeruzalem zal volbrengen.</p>
+
+      <h3>3. De reis naar Jeruzalem en buitenstaanders (Hoofdstuk 10 t/m 19)</h3>
+      <p>In dit lange reisgedeelte daagt Jezus zijn leerlingen uit tot een minimalistische houding ten opzichte van geld en bezit. Hij zoekt bewust de sociaal uitgestotenen en gehaatte figuren op, zoals Samaritanen en de schatrijke belastinginner Zacheüs. Via gelijkenissen zoals de <strong>verloren zoon</strong> laat hij zien dat Gods hart uitgaat naar verloren mensen, en dat een oprecht en nederig hart (met <strong>nederigheid en berouw</strong>) de enige toegangseis is voor zijn feestmaal.</p>
+
+      <h3>4. De laatste week, het kruis en Emmaüs (Hoofdstuk 20 t/m 24)</h3>
+      <p>Tijdens de laatste Pesachmaaltijd geeft Jezus een nieuwe diepe betekenis aan het <strong>brood</strong> en de wijn. Ondanks dat de Romeinse gouverneur Pilatus en koning Herodes hem herhaaldelijk onschuldig verklaren, wordt hij onder druk van de menigte gekruisigd. Aan het kruis spreekt hij vergeving uit. Op de dag van zijn opstanding ontmoet hij twee verdrietige reizigers op de weg naar Emmaüs; pas wanneer hij aan tafel het brood breekt, vallen de schellen van hun ogen en herkennen ze de levende Heer.</p>
+
+      <div style="background: #eef9ff; padding: 20px; border-radius: 6px; margin: 20px 0; border: 1px solid #b8e2f8;">
+        <h4 style="margin-top:0; color: var(--primary);">Uitgebreide Verklarende Woordenlijst</h4>
+        <ul style="margin-bottom:0;">
+          <li><strong>Afesis:</strong> Grieks voor vrijlating of kwijtschelding; verwijst naar het Joodse Jubeljaar waarin schulden werden kwijtgescholden en slaven vrijkwamen.</li>
+          <li><strong>Vlakke veld:</strong> De locatie waar Jezus zijn veldrede hield en onderwijs gaf over de omgekeerde sociale orde van Gods koninkrijk.</li>
+          <li><strong>Exodus:</strong> De geestelijke uittocht en bevrijding van zonde en dood die Jezus door zijn lijden en opstanding in Jeruzalem volbracht.</li>
+          <li><strong>Nederigheid en berouw:</strong> De grondhouding van een mens die inziet dat hij/zij genade nodig heeft; de ultieme toegang tot Gods familiefeest.</li>
+          <li><strong>Brood:</strong> Het centrale herkenningsteken en symbool van zelfopofferende liefde waarmee de Emmaüsgangers Jezus herkenden.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Nieuwe Opdracht: Infographic Analyse -->
+    <section class="card">
+      <h2>Deel 1: Infographic Analyse (Het Omgekeerde Koninkrijk)</h2>
+      <p>Bekijk de visuele infographic hierboven goed en beantwoord de volgende vragen:</p>
+
+      <div class="question-block">
+        <label for="info-1"><strong>1. Het Omgekeerde Koninkrijk:</strong><br>In de infographic zie je dat Jezus een 'omgekeerd koninkrijk' brengt voor armen en buitenstaanders. Hoe wordt dit in de bovenste helft van de afbeelding visueel uitgebeeld qua sociale rollen en vrijlating?</label>
+        <textarea id="info-1" placeholder="Typ je antwoord hier..."></textarea>
+      </div>
+
+      <div class="question-block">
+        <label for="info-2"><strong>2. De Nieuwe Uittocht (Exodus):</strong><br>Onderaan de infographic zie je de overgang naar de voltooiing via een 'exodus' (als de nieuwe Mozes) richting het lege graf en de missie naar alle volken. Wat betekent deze 'nieuwe uittocht' volgens de context van het evangelie?</label>
+        <textarea id="info-2" placeholder="Typ je antwoord hier..."></textarea>
+      </div>
+    </section>
+
+    <!-- Deel 2: Chronologie & Structuur -->
+    <section class="card">
+      <h2>Deel 2: Structuur & Chronologie van het Evangelie</h2>
+      <p>Het boek Lukas kent een heldere opbouw in 5 hoofdfasen. Zet de volgende fasen in de juiste chronologische volgorde van 1 tot 5:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Fasenaam</th>
+            <th>Jouw Volgorde (1 t/m 5)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Reis naar Jeruzalem </td>
+            <td><input type="text" class="chrono-input inline-input" data-fase="reis" placeholder="1-5"></td>
+          </tr>
+          <tr>
+            <td>Opstanding & Emmaüs </td>
+            <td><input type="text" class="chrono-input inline-input" data-fase="opstanding" placeholder="1-5"></td>
+          </tr>
+          <tr>
+            <td>Geboorte van Johannes en Jezus </td>
+            <td><input type="text" class="chrono-input inline-input" data-fase="geboorte" placeholder="1-5"></td>
+          </tr>
+          <tr>
+            <td>Lijdensweek & Kruisiging </td>
+            <td><input type="text" class="chrono-input inline-input" data-fase="lijden" placeholder="1-5"></td>
+          </tr>
+          <tr>
+            <td>Optreden in Galilea </td>
+            <td><input type="text" class="chrono-input inline-input" data-fase="galilea" placeholder="1-5"></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Deel 3: Invulzinnen -->
+    <section class="card">
+      <h2>Deel 3: Invulzinnen – Kernthema's van Lucas</h2>
+      <p>Vul de ontbrekende sleutelbegrippen in op de juiste plaats. Kies uit de woordenwolk:</p>
+
+      <div class="word-box">
+        brood • Afesis • nederigheid en berouw • exodus • vlakke veld
+      </div>
+
+      <div class="question-block" style="line-height: 2.3;">
+        1. Het omgekeerde koninkrijk: Jezus gaf zijn onderwijs op een vlakke plaats, ook wel het onderwijs op het 
+        <input type="text" class="fill-input inline-input" data-nr="1" placeholder="antwoord 1"> genoemd.<br>
+        2. Het goede nieuws voor armen: Het Griekse woord voor vrijheid is 
+        <input type="text" class="fill-input inline-input" data-nr="2" placeholder="antwoord 2">, wat 'vrijlating' betekent.<br>
+        3. De nieuwe Mozes: Op de berg spraken Jezus, Mozes en Elia over de 
+        <input type="text" class="fill-input inline-input" data-nr="3" placeholder="antwoord 3"> die Jezus in Jeruzalem zou volbrengen.<br>
+        4. De verloren zoon: De gelijkenis laat zien dat de enige echte toegangseis voor Gods familiefeest 
+        <input type="text" class="fill-input inline-input" data-nr="4" placeholder="antwoord 4"> is.<br>
+        5. De Emmaüsgangers: Twee bedrukte leerlingen herkenden de opgestane Heer pas toen hij het 
+        <input type="text" class="fill-input inline-input" data-nr="5" placeholder="antwoord 5"> brak.
+      </div>
+    </section>
+
+    <!-- Deel 4: Matchingsmatrix -->
+    <section class="card">
+      <h2>Deel 4: Koppelopdracht – Personen & Sleutelbegrippen</h2>
+      <p>Koppel de personen en begrippen uit Kolom A aan de juiste omschrijving uit Kolom B door de juiste letter te kiezen.</p>
+
+      <div style="margin-bottom: 15px; background: #eef9ff; padding: 15px; border-radius: 4px; font-size: 0.95rem;">
+        <strong>A.</strong> De Romeinse gouverneur die tot 3 maal toe concludeerde dat Jezus volkomen onschuldig was.<br>
+        <strong>B.</strong> Het Griekse woord voor vrijlating/vergeving (Afesis) gekoppeld aan het Jubeljaar.<br>
+        <strong>C.</strong> Ontvangers van onwaarschijnlijke goddelijke beloftes over de geboorte van een zoon.<br>
+        <strong>D.</strong> Twee gebroken leerlingen die hun eigen verwachtingen aan Jezus oplegden tot hij het brood brak.<br>
+        <strong>E.</strong> De gehate joodse belastinginner voor de Romeinen die veranderde na ontmoeting met Jezus.<br>
+        <strong>F.</strong> De profetische ouderling in de tempel die zong dat Jezus een licht voor de volken zou zijn.<br>
+        <strong>G.</strong> De tolheffer/belastinginner die als buitenstaander door Jezus werd geroepen.
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Persoon / Begrip</th>
+            <th>Omschrijving (Letter A t/m G)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1. Zacharias & Elisabeth / Maria & Jozef</td>
+            <td>
+              <select class="term-input" data-term="1">
+                <option value="">-- Kies letter --</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>2. Simeon</td>
+            <td>
+              <select class="term-input" data-term="2">
+                <option value="">-- Kies letter --</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>3. Levi</td>
+            <td>
+              <select class="term-input" data-term="3">
+                <option value="">-- Kies letter --</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>4. Pilatus</td>
+            <td>
+              <select class="term-input" data-term="4">
+                <option value="">-- Kies letter --</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>5. Emmaüsgangers</td>
+            <td>
+              <select class="term-input" data-term="5">
+                <option value="">-- Kies letter --</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>6. Jubeljaar / Afesis</td>
+            <td>
+              <select class="term-input" data-term="6">
+                <option value="">-- Kies letter --</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>7. Zacheüs</td>
+            <td>
+              <select class="term-input" data-term="7">
+                <option value="">-- Kies letter --</option>
+                <option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Deel 5: Inhoudscheck (Meerkeuze & Waar/Niet Waar) -->
+    <section class="card">
+      <h2>Deel 5: Snelle Inhoudscheck</h2>
+      
+      <h4>5.1 Meerkeuzevragen</h4>
+      <div class="question-block">
+        <label><strong>1. Waar voert Lukas de geslachtslijst van Jezus helemaal naar terug om te bewijzen dat Jezus er is voor de gehele mensheid?</strong></label>
+        <select id="mc-1" class="form-group">
+          <option value="">-- Kies antwoord --</option>
+          <option value="A">A) Koning David</option>
+          <option value="B">B) Abraham</option>
+          <option value="C">C) Adam</option>
+        </select>
+
+        <label><strong>2. Wat deed Jezus toen hij in Jeruzalem aankwam om te laten zien dat het tempelsysteem zijn doel had misleid?</strong></label>
+        <select id="mc-2" class="form-group">
+          <option value="">-- Kies antwoord --</option>
+          <option value="A">A) Hij verjoeg de dierenverkopers uit de tempel en legde het offersysteem stil.</option>
+          <option value="B">B) Hij stelde een nieuwe hogepriester aan om de tempel te besturen.</option>
+          <option value="C">C) Hij weigerde het tempelterrein te betreden en bleef buiten de stadsmuren.</option>
+        </select>
+
+        <label><strong>3. Wat veranderde Jezus tijdens de Pesachmaaltijd in nieuwe symbolen voor zijn bevrijdende dood?</strong></label>
+        <select id="mc-3" class="form-group">
+          <option value="">-- Kies antwoord --</option>
+          <option value="A">A) De olielamp en het water</option>
+          <option value="B">B) Het brood en de wijn</option>
+          <option value="C">C) Het zout en de kruiden</option>
+        </select>
+      </div>
+
+      <h4>5.2 Waar / Niet Waar Stellingen</h4>
+      <div class="question-block">
+        <label>1. Lucas schreef zijn evangelie als het eerste deel van een tweedelig werk, waarvan Handelingen het tweede deel is.</label>
+        <select id="tf-1" class="form-group">
+          <option value="">-- Kies --</option>
+          <option value="Waar">Waar</option>
+          <option value="Niet Waar">Niet Waar</option>
+        </select>
+
+        <label>2. Jezus moedigde zijn leerlingen aan om zoveel mogelijk geld en bezittingen te verzamelen.</label>
+        <select id="tf-2" class="form-group">
+          <option value="">-- Kies --</option>
+          <option value="Waar">Waar</option>
+          <option value="Niet Waar">Niet Waar</option>
+        </select>
+
+        <label>3. Aan het kruis bood Jezus vergeving aan de soldaten en beloofde hij de crimineel naast hem het paradijs.</label>
+        <select id="tf-3" class="form-group">
+          <option value="">-- Kies --</option>
+          <option value="Waar">Waar</option>
+          <option value="Niet Waar">Niet Waar</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Deel 6: Verdieping & Reflectie -->
+    <section class="card">
+      <h2>Deel 6: Verdieping & Reflectie</h2>
+      <p>Beantwoord de volgende reflectievragen uitgebreid in eigen woorden.</p>
+
+      <div class="question-block">
+        <label for="deep-1"><strong>1. Radicale Vrijgevigheid:</strong><br>Hoe kun jij op school of thuis vrijgevig zijn met jouw tijd, aandacht of spullen naar iemand die het minder goed heeft? Noem een concreet voorbeeld.</label>
+        <textarea id="deep-1" placeholder="Typ je antwoord hier..."></textarea>
+      </div>
+
+      <div class="question-block">
+        <label for="deep-2"><strong>2. Omzien naar Buitenstaanders:</strong><br>Wie worden er in jouw omgeving of klas soms als 'buitenstaander' gezien? Hoe zou jij de gastvrije houding van Jezus naar hen toe kunnen toepassen?</label>
+        <textarea id="deep-2" placeholder="Typ je antwoord hier..."></textarea>
+      </div>
+
+      <div class="question-block">
+        <label for="deep-3"><strong>3. Vergeving:</strong><br>Waarom is het soms zo moeilijk om iemand die jou gekwetst heeft te vergeven? Wat kan het voorbeeld van Jezus aan het kruis jou daarin leren?</label>
+        <textarea id="deep-3" placeholder="Typ je antwoord hier..."></textarea>
+      </div>
+
+      <div class="question-block">
+        <label for="drawing-canvas"><strong>4. Creatieve Verwerking (Emmaüs):</strong><br>Teken hier in het vlak het symbool van de evangelist Lukas:</label>
+        <canvas id="drawing-canvas" width="500" height="250"></canvas>
+        <div style="margin-top: 8px;">
+          <button type="button" id="clear-canvas-btn" style="background-color: var(--accent); padding: 6px 14px; font-size: 0.85rem;">Tekening wissen</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Webhook & Indienen -->
+    <section class="card">
+      <h2>Verzenden</h2>
+      <input type="hidden" id="webhook-url">
+
+      <div class="actions">
+        <button type="submit" class="btn-success">Verzenden en Nakijken</button>
+      </div>
+
+      <div id="status-message"></div>
+
+      <!-- Container voor resultaten en feedback vanuit Node-RED -->
+      <div id="response-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 20px;">
+          <div>
+            <h2 style="margin: 0; border: none; padding: 0;">Beoordeling</h2>
+            <span id="res-student-info" style="color: #666; font-size: 0.95rem;">-</span>
+          </div>
+          <div>
+            <div id="res-grade-badge" class="grade-badge grade-pass">0.0</div>
+          </div>
+        </div>
+
+        <h3>Behaalde punten per onderdeel</h3>
+        <div id="res-scores-container" style="margin-bottom: 20px;"></div>
+
+        <div class="feedback-card">
+          <h4 style="margin: 0 0 10px 0; color: var(--primary);">Feedback & Aandachtspunten</h4>
+          <ul id="res-feedback-list" style="margin: 0; padding-left: 20px;"></ul>
+        </div>
+      </div>
+    </section>
+  </form>
+</div>
+
+<script>
+  // BEVEILIGING: Rechtermuisknop & PrintScreen/Opslaan blokkeren
+  document.addEventListener('contextmenu', (e) => e.preventDefault());
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S')) {
+      e.preventDefault();
+      return false;
+    }
+    if (e.key === 'PrintScreen') {
+      e.preventDefault();
+      navigator.clipboard.writeText('');
+      alert('Screenshots maken is niet toegestaan.');
+    }
+  });
+
+  const NODE_RED_WEBHOOK_URL = 'https://node-red.xyz/verwerk-opdracht';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('assignment-form');
+    document.getElementById('webhook-url').value = NODE_RED_WEBHOOK_URL;
+    const statusMsg = document.getElementById('status-message');
+    const responseBox = document.getElementById('response-box');
+
+    // Canvas tekenfunctionaliteit
+    const canvas = document.getElementById('drawing-canvas');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+
+    function getCanvasCoords(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      const coords = getCanvasCoords(e);
+      ctx.beginPath();
+      ctx.moveTo(coords.x, coords.y);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      e.preventDefault();
+      const coords = getCanvasCoords(e);
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = '#2c3e50';
+      ctx.lineTo(coords.x, coords.y);
+      ctx.stroke();
+    }
+
+    function stopDrawing() { isDrawing = false; }
+
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseleave', stopDrawing);
+    canvas.addEventListener('touchstart', startDrawing);
+    canvas.addEventListener('touchmove', draw);
+    canvas.addEventListener('touchend', stopDrawing);
+
+    document.getElementById('clear-canvas-btn').addEventListener('click', () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+
+    function validateForm() {
+      let isValid = true;
+      let firstInvalidElement = null;
+      const inputs = form.querySelectorAll('input:not([type="hidden"]), select, textarea');
+      
+      inputs.forEach(input => {
+        if (!input.value.trim()) {
+          isValid = false;
+          input.classList.add('invalid-field');
+          if (!firstInvalidElement) firstInvalidElement = input;
+        } else {
+          input.classList.remove('invalid-field');
+        }
+        input.addEventListener('input', () => input.classList.remove('invalid-field'), { once: true });
+      });
+
+      if (!isValid && firstInvalidElement) {
+        firstInvalidElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return isValid;
+    }
+
+    function collectFormData() {
+      const infoData = {
+        omgekeerde_koninkrijk: document.getElementById('info-1').value,
+        nieuwe_uittocht: document.getElementById('info-2').value
+      };
+
+      const chronoData = {};
+      document.querySelectorAll('.chrono-input').forEach(input => {
+        chronoData[input.dataset.fase] = input.value.trim();
+      });
+
+      const fillData = {};
+      document.querySelectorAll('.fill-input').forEach(input => {
+        fillData[`gat_${input.dataset.nr}`] = input.value.trim();
+      });
+
+      const termData = {};
+      document.querySelectorAll('.term-input').forEach(select => {
+        termData[`item_${select.dataset.term}`] = select.value;
+      });
+
+      return {
+        timestamp: new Date().toISOString(),
+        onderwerp: "Evangelie volgens Lukas",
+        leerling: {
+          naam: document.getElementById('student-name').value,
+          klas: document.getElementById('student-class').value,
+          datum: document.getElementById('assignment-date').value
+        },
+        opdrachten: {
+          deel_1_infographic: infoData,
+          deel_2_chronologie: chronoData,
+          deel_3_invulzinnen: fillData,
+          deel_4_matching: termData,
+          deel_5_inhoudscheck: {
+            mc_1: document.getElementById('mc-1').value,
+            mc_2: document.getElementById('mc-2').value,
+            mc_3: document.getElementById('mc-3').value,
+            tf_1: document.getElementById('tf-1').value,
+            tf_2: document.getElementById('tf-2').value,
+            tf_3: document.getElementById('tf-3').value
+          },
+          deel_6_reflectie: {
+            vrijgevigheid: document.getElementById('deep-1').value,
+            buitenstaanders: document.getElementById('deep-2').value,
+            vergeving: document.getElementById('deep-3').value,
+            tekening_emmaus: canvas.toDataURL()
+          }
+        }
+      };
+    }
+
+    function displayResults(data) {
+      document.getElementById('res-student-info').textContent = `${data.leerling?.naam || 'Leerling'} (${data.leerling?.klas || ''})`;
+      const gradeBadge = document.getElementById('res-grade-badge');
+      const grade = data.eindcijfer ?? 0;
+      gradeBadge.textContent = grade.toFixed(1);
+      gradeBadge.className = grade >= 5.5 ? 'grade-badge grade-pass' : 'grade-badge grade-fail';
+
+      const container = document.getElementById('res-scores-container');
+      container.innerHTML = '';
+      if (data.scores) {
+        for (const [key, details] of Object.entries(data.scores)) {
+          const row = document.createElement('div');
+          row.className = 'score-row';
+          row.innerHTML = `<span>${key}</span> <strong>${details.score}/${details.max} pnt</strong>`;
+          container.appendChild(row);
+        }
+      }
+
+      const feedbackList = document.getElementById('res-feedback-list');
+      feedbackList.innerHTML = '';
+      if (data.feedback && data.feedback.length > 0) {
+        data.feedback.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          feedbackList.appendChild(li);
+        });
+      } else {
+        const li = document.createElement('li');
+        li.textContent = 'Uitstekend gedaan!';
+        feedbackList.appendChild(li);
+      }
+
+      responseBox.style.display = 'block';
+      responseBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!validateForm()) {
+        statusMsg.style.display = 'block';
+        statusMsg.className = 'status-error';
+        statusMsg.textContent = 'Vul eerst alle rood omlijnde velden in.';
+        return;
+      }
+
+      const payload = collectFormData();
+      statusMsg.style.display = 'block';
+      statusMsg.className = 'status-loading';
+      statusMsg.textContent = 'Antwoorden worden verzonden en beoordeeld...';
+      responseBox.style.display = 'none';
+
+      try {
+        const response = await fetch(document.getElementById('webhook-url').value, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          statusMsg.className = 'status-success';
+          statusMsg.textContent = 'Succesvol verzonden!';
+          const contentType = response.headers.get("content-type");
+          if (contentType && contentType.includes("application/json")) {
+            displayResults(await response.json());
+          } else {
+            alert("Reactie van server: " + await response.text());
+          }
+        } else {
+          throw new Error(`Serverstatus: ${response.status}`);
+        }
+      } catch (err) {
+        statusMsg.className = 'status-error';
+        statusMsg.textContent = `Fout bij verzenden: ${err.message}. (Controleer CORS in Node-RED).`;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
